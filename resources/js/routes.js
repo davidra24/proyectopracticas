@@ -17,6 +17,11 @@ export default new VueRouter({
             component: require('./views/adminpanel')
         },
         {
+            path: '/estudiantes',
+            name: 'estudiantes',
+            component: require('./views/estudiantes')
+        },
+        {
             path: '*',
             name: 'not found',
             component: NotFound

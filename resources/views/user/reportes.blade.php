@@ -1,4 +1,4 @@
 @extends('navbar.navbar_user')
 @section('nav')
-    <UserPanel />
+    <Reportes />
 @endsection
