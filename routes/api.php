@@ -17,7 +17,9 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+Route::apiResource('busses','BusseController');
+Route::apiResource('practices','PracticeController');
 
-Route::get('/busses','BussesController@index')->name('busses');
+
 
 

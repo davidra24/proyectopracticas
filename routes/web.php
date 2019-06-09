@@ -28,6 +28,7 @@ Route::group(
         Route::get('/practicas', 'AdminController@practicas');
         Route::get('/docentes', 'AdminController@docentes');
         Route::get('/buses', 'AdminController@buses');
+        
     }
 );
 Route::group(
