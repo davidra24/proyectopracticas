@@ -12,9 +12,16 @@ class ManagePracticeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    private $managePractice;
+    public function __construct(ManagePractice $managePractice){
+        $this->managePractice=$managePractice;
+
+    }
+    
+     public function index()
     {
-        //
+        $data= $this->managePractice::all();
+        return response()->json($data);
     }
 
     /**
