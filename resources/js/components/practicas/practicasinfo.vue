@@ -1,8 +1,8 @@
 <template>
   <div class="row">
-    <div class="col-12 col-md-8 p-3 mb-2 bg-info text-white" v-bind:id="info.id">
-      <input v-if="editMode" class="form-control" placeholder="nombre" v-model="info.nombre">
-      <p v-else>{{info.nombre}}</p>
+    <div class="col-12 col-md-8 p-3 mb-2 bg-info text-white">
+      <input v-if="editMode" class="form-control" placeholder="lugar" v-model="info.lugar">
+      <p v-else>{{info.lugar}}</p>
     </div>
     <div class="col-6 col-md-2">
       <br>

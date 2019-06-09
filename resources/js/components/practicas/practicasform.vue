@@ -2,11 +2,8 @@
   <form action class="form-group" @submit.prevent="save()">
     <br>
     <div class="row">
-      <div class="col-12 col-md-4">
-        <input class="form-control" placeholder="codigo" type="number" v-model="form.id">
-      </div>
-      <div class="col-12 col-md-4">
-        <input class="form-control" placeholder="nombre" type="text" v-model="form.nombre">
+      <div class="col-12 col-md-8">
+        <input class="form-control" placeholder="codigo" type="text" v-model="form.lugar">
       </div>
       <div class="col-12 col-md-4">
         <button type="submit" class="form-control btn btn-success">Guardar</button>

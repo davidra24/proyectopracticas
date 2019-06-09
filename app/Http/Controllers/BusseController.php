@@ -13,13 +13,13 @@ class BusseController extends Controller
      * @return \Illuminate\Http\Response
      */
     private $busse;
-    public function __construct(Busse $busse){
-        $this->busse=$busse;
-
+    public function __construct(Busse $busse)
+    {
+        $this->busse = $busse;
     }
     public function index()
     {
-        $busses= ['data'=>$this->busse::all()];
+        $busses = $this->busse::all();
         return response()->json($busses);
     }
 
@@ -30,7 +30,6 @@ class BusseController extends Controller
      */
     public function create()
     {
-        
     }
 
     /**
@@ -40,15 +39,13 @@ class BusseController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {   
-        $search=Busse::find($request->id);
-        if($search==null){
-            $busse= Busse::create($request->all());
+    {
+        $search = Busse::find($request->id);
+        if ($search == null) {
+            $busse = Busse::create($request->all());
             $busse->save();
             return response()->json($busse);
-        }
-        else{
-            
+        } else {
             return null;
         }
     }
@@ -61,9 +58,8 @@ class BusseController extends Controller
      */
     public function show($busse)
     {
-        
-        $data= Busse::find($busse);
-        $busse=['data'=>$data];
+        $data = Busse::find($busse);
+        $busse = [$data];
         return response()->json($busse);
     }
 
@@ -75,7 +71,6 @@ class BusseController extends Controller
      */
     public function edit(Busse $busse)
     {
-        
     }
 
     /**
@@ -87,14 +82,13 @@ class BusseController extends Controller
      */
     public function update(Request $request, Busse $busse)
     {
-        $data= Busse::find($busse);
-        if($data==null){
+        $data = Busse::find($busse);
+        if ($data == null) {
             return null;
-        }
-        else{
+        } else {
             $data->fill($request->all());
             $data->save();
-            $busse=['data'=>$data];
+            $busse = $data;
             return response()->json($busse);
         }
     }
@@ -106,12 +100,11 @@ class BusseController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function destroy(Busse $busse)
-    {   
-        $data= Busse::find($busse);
-        if($data==null){
+    {
+        $data = Busse::find($busse);
+        if ($data == null) {
             return null;
-        }
-        else{
+        } else {
             $data->delete();
             return true;
         }
