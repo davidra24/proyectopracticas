@@ -15,7 +15,7 @@
 
 <script>
 export default {
-  name: "docenteform",
+  name: "estudianteform",
   props: ["form"],
   data() {
     return {
@@ -24,14 +24,7 @@ export default {
       error: null
     };
   },
-  methods: {
-    edit() {
-      this.editMode = true;
-    },
-    check() {
-      this.editMode = false;
-    }
-  },
+  methods: {},
   mounted() {
     console.log("Component mounted.");
   }

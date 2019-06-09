@@ -5,11 +5,7 @@ import Vue from 'vue';
 window.Vue = Vue;
 
 import { library } from '@fortawesome/fontawesome-svg-core';
-import {
-    faEdit,
-    faTrash,
-    faCheckCircle
-} from '@fortawesome/free-solid-svg-icons';
+import { faEdit, faTrash, faCheck } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 
 import Login from './views/login.vue';
@@ -26,7 +22,7 @@ import router from './routes';
 import VueSweetalert2 from 'vue-sweetalert2';
 
 Vue.use(VueSweetalert2);
-library.add(faEdit, faTrash, faCheckCircle);
+library.add(faEdit, faTrash, faCheck);
 Vue.component('font-awesome-icon', FontAwesomeIcon);
 Vue.component('DocenteInfo', DocenteInfo);
 Vue.component('DocenteForm', DocenteForm);

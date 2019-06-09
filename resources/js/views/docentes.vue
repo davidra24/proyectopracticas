@@ -2,7 +2,7 @@
   <div class="container">
     <DocenteForm :form="form"></DocenteForm>
     <br>
-    <div v-for="docente in data">
+    <div v-for="docente in data" v-bind:key="docente">
       <DocenteInfo :key="docente.id" :info="docente"></DocenteInfo>
     </div>
   </div>

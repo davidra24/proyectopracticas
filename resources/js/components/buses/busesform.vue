@@ -2,7 +2,10 @@
   <form action class="form-group" @submit.prevent="save()">
     <br>
     <div class="row">
-      <div class="col-12 col-md-8">
+      <div class="col-12 col-md-4">
+        <input class="form-control" placeholder="codigo" type="number" v-model="form.id">
+      </div>
+      <div class="col-12 col-md-4">
         <input class="form-control" placeholder="nombre" type="text" v-model="form.nombre">
       </div>
       <div class="col-12 col-md-4">

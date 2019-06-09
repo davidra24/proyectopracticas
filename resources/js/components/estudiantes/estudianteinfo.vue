@@ -1,6 +1,6 @@
 <template>
   <div class="row">
-    <div class="col-12 col-md-8 p-3 mb-2 bg-info text-white">
+    <div class="col-12 col-md-8 p-3 mb-2 bg-info text-white" v-bind:id="info.id">
       <input v-if="editMode" class="form-control" placeholder="nombre" v-model="info.nombre">
       <p v-else>{{info.nombre}}</p>
     </div>
@@ -78,3 +78,4 @@ export default {
   }
 };
 </script>
+ 

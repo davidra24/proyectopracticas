@@ -11493,9 +11493,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "docenteform",
   props: ["form"],
@@ -11553,6 +11550,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "docenteinfo",
   props: ["info"],
@@ -11569,6 +11568,14 @@ __webpack_require__.r(__webpack_exports__);
     },
     check: function check() {
       this.editMode = false;
+      this.$swal({
+        position: "top-end",
+        title: "Actualizado!",
+        text: "Su dato ha sido actualizado satisfactoriamente",
+        type: "success",
+        showConfirmButton: false,
+        timer: 1500
+      });
     },
     del: function del() {
       var _this = this;
@@ -11584,7 +11591,14 @@ __webpack_require__.r(__webpack_exports__);
         cancelButtonText: "No"
       }).then(function (result) {
         if (result.value) {
-          _this.$swal("Eliminado!", "Su dato ha sido eliminado satisfactoriamente", "success");
+          _this.$swal({
+            position: "top-end",
+            title: "Eliminado!",
+            text: "Su dato ha sido eliminado satisfactoriamente",
+            type: "success",
+            showConfirmButton: false,
+            timer: 1500
+          });
         }
       });
     }
@@ -47933,31 +47947,7 @@ var render = function() {
       _c("br"),
       _vm._v(" "),
       _c("div", { staticClass: "row" }, [
-        _c("div", { staticClass: "col-12 col-md-4" }, [
-          _c("input", {
-            directives: [
-              {
-                name: "model",
-                rawName: "v-model",
-                value: _vm.form.id,
-                expression: "form.id"
-              }
-            ],
-            staticClass: "form-control",
-            attrs: { placeholder: "codigo", type: "number" },
-            domProps: { value: _vm.form.id },
-            on: {
-              input: function($event) {
-                if ($event.target.composing) {
-                  return
-                }
-                _vm.$set(_vm.form, "id", $event.target.value)
-              }
-            }
-          })
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "col-12 col-md-4" }, [
+        _c("div", { staticClass: "col-12 col-md-8" }, [
           _c("input", {
             directives: [
               {
@@ -48025,40 +48015,35 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "row" }, [
-    _c(
-      "div",
-      {
-        staticClass: "col-12 col-md-8 p-3 mb-2 bg-info text-white",
-        attrs: { id: _vm.info.id }
-      },
-      [
-        _vm.editMode
-          ? _c("input", {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.info.nombre,
-                  expression: "info.nombre"
-                }
-              ],
-              staticClass: "form-control",
-              attrs: { placeholder: "nombre" },
-              domProps: { value: _vm.info.nombre },
-              on: {
-                input: function($event) {
-                  if ($event.target.composing) {
-                    return
-                  }
-                  _vm.$set(_vm.info, "nombre", $event.target.value)
-                }
+    _c("div", { staticClass: "col-12 col-md-8 p-3 mb-2 bg-info text-white" }, [
+      _vm.editMode
+        ? _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.info.nombre,
+                expression: "info.nombre"
               }
-            })
-          : _c("p", [_vm._v(_vm._s(_vm.info.nombre))])
-      ]
-    ),
+            ],
+            staticClass: "form-control",
+            attrs: { placeholder: "nombre" },
+            domProps: { value: _vm.info.nombre },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.$set(_vm.info, "nombre", $event.target.value)
+              }
+            }
+          })
+        : _c("p", [_vm._v(_vm._s(_vm.info.nombre))])
+    ]),
     _vm._v(" "),
     _c("div", { staticClass: "col-6 col-md-2" }, [
+      _c("br"),
+      _vm._v(" "),
       _vm.editMode
         ? _c(
             "button",
@@ -48071,7 +48056,7 @@ var render = function() {
                 }
               }
             },
-            [_c("font-awesome-icon", { attrs: { icon: "check-circle" } })],
+            [_c("font-awesome-icon", { attrs: { icon: "check" } })],
             1
           )
         : _c(
@@ -48091,6 +48076,8 @@ var render = function() {
     ]),
     _vm._v(" "),
     _c("div", { staticClass: "col-6 col-md-2" }, [
+      _c("br"),
+      _vm._v(" "),
       _c(
         "button",
         {
@@ -48209,6 +48196,7 @@ var render = function() {
       _vm._l(_vm.data, function(docente) {
         return _c(
           "div",
+          { key: docente },
           [_c("DocenteInfo", { key: docente.id, attrs: { info: docente } })],
           1
         )
@@ -63606,7 +63594,7 @@ window.Vue = vue__WEBPACK_IMPORTED_MODULE_2___default.a;
 
 
 vue__WEBPACK_IMPORTED_MODULE_2___default.a.use(vue_sweetalert2__WEBPACK_IMPORTED_MODULE_17__["default"]);
-_fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_3__["library"].add(_fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_4__["faEdit"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_4__["faTrash"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_4__["faCheckCircle"]);
+_fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_3__["library"].add(_fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_4__["faEdit"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_4__["faTrash"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_4__["faCheck"]);
 vue__WEBPACK_IMPORTED_MODULE_2___default.a.component('font-awesome-icon', _fortawesome_vue_fontawesome__WEBPACK_IMPORTED_MODULE_5__["FontAwesomeIcon"]);
 vue__WEBPACK_IMPORTED_MODULE_2___default.a.component('DocenteInfo', _components_docentes_docenteinfo_vue__WEBPACK_IMPORTED_MODULE_10__["default"]);
 vue__WEBPACK_IMPORTED_MODULE_2___default.a.component('DocenteForm', _components_docentes_docenteform_vue__WEBPACK_IMPORTED_MODULE_11__["default"]);

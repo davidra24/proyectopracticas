@@ -1,10 +1,18 @@
 <template>
   <div class="row">
-    <div class="col-12 col-md-8 p-3 mb-2 bg-info text-white">
-      <input v-if="editMode" class="form-control" placeholder="nombre" v-model="info.nombre">
-      <p v-else>{{info.nombre}}</p>
+    <div class="col-12 col-md-3 p-3 mb-2 bg-info text-white">
+      <input v-if="editMode" class="form-control" placeholder="conductor" v-model="info.conductor">
+      <p v-else>{{info.conductor}}</p>
     </div>
-    <div class="col-6 col-md-2">
+    <div class="col-12 col-md-3 p-3 mb-2 bg-info text-white">
+      <input v-if="editMode" class="form-control" placeholder="conductor" v-model="info.pasajeros">
+      <p v-else>{{info.pasajeros}}</p>
+    </div>
+    <div class="col-12 col-md-3 p-3 mb-2 bg-info text-white">
+      <input v-if="editMode" class="form-control" placeholder="conductor" v-model="info.tipo">
+      <p v-else>{{info.tipo}}</p>
+    </div>
+    <div class="col-6 col-md-1">
       <br>
       <button v-if="editMode" type="button" class="btn btn-outline-dark" @click="check()">
         <font-awesome-icon icon="check"/>
@@ -13,7 +21,7 @@
         <font-awesome-icon icon="edit"/>
       </button>
     </div>
-    <div class="col-6 col-md-2">
+    <div class="col-6 col-md-1">
       <br>
       <button type="button" class="btn btn-outline-danger" @click="del()">
         <font-awesome-icon icon="trash"/>
