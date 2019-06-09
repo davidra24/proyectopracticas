@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <BusForm :form="form"></BusForm>
+    <BusForm :form="form" @update="update"></BusForm>
     <br>
     <div class="d-flex justify-content-center" v-if="this.loading" :inserted="this.inserted()">
       <Loading/>
@@ -9,7 +9,7 @@
       <h2>Ha ocurrido un error {{this.error.message}}</h2>
     </div>
     <div v-else v-for="bus in data" v-bind:key="bus.id">
-      <BusInfo :key="bus.id" :info="bus"></BusInfo>
+      <BusInfo :key="bus.id" :info="bus" @update="update"></BusInfo>
     </div>
   </div>
 </template>
@@ -25,8 +25,9 @@ export default {
     };
   },
   methods: {
-    getBuses() {
-      fetch("/api/busses")
+    async getBuses() {
+      this.loading = true;
+      await fetch("/api/busses")
         .then(res => res.json())
         .then(res => {
           this.data = res;
@@ -36,6 +37,9 @@ export default {
           this.error = error;
           this.loading = false;
         });
+    },
+    update() {
+      this.getBuses();
     },
     inserted() {
       this.loading = true;

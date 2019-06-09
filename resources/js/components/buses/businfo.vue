@@ -81,6 +81,7 @@ export default {
       }).then(response => {
         if (response.status === 200) {
           this.loading = false;
+          this.get();
           this.$swal({
             position: "top-end",
             title: "Actualizado!",
@@ -116,15 +117,15 @@ export default {
         timer: 1500
       });
     },
+    get() {
+      this.$emit("update", null);
+    },
     async remove() {
       await fetch(`/api/busses/${this.id}`, {
         method: "DELETE",
         headers: { "Content-Type": "application/json" }
       }).then(res => {
         if (res.status === 200) {
-          this.setState({
-            loading: true
-          });
           this.get();
           this.$swal({
             position: "top-end",

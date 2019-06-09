@@ -30,7 +30,6 @@
 <script>
 export default {
   name: "docenteform",
-  props: { inserted: { type: Function } },
   data() {
     return {
       form: {
@@ -44,8 +43,8 @@ export default {
     };
   },
   methods: {
-    ins() {
-      inserted;
+    get() {
+      this.$emit("update", null);
     },
     clear() {
       this.form.conductor = "";
@@ -64,6 +63,7 @@ export default {
         if (response.status === 200) {
           this.loading = false;
           this.clear();
+          this.get();
           this.$swal({
             position: "top-end",
             title: "Guardado!",

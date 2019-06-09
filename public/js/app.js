@@ -11529,11 +11529,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "docenteform",
-  props: {
-    inserted: {
-      type: Function
-    }
-  },
   data: function data() {
     return {
       form: {
@@ -11547,8 +11542,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     };
   },
   methods: {
-    ins: function ins() {
-      inserted;
+    get: function get() {
+      this.$emit("update", null);
     },
     clear: function clear() {
       this.form.conductor = "";
@@ -11578,6 +11573,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                     _this.loading = false;
 
                     _this.clear();
+
+                    _this.get();
 
                     _this.$swal({
                       position: "top-end",
@@ -11733,6 +11730,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   if (response.status === 200) {
                     _this.loading = false;
 
+                    _this.get();
+
                     _this.$swal({
                       position: "top-end",
                       title: "Actualizado!",
@@ -11782,6 +11781,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         timer: 1500
       });
     },
+    get: function get() {
+      this.$emit("update", null);
+    },
     remove: function () {
       var _remove = _asyncToGenerator(
       /*#__PURE__*/
@@ -11800,10 +11802,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   }
                 }).then(function (res) {
                   if (res.status === 200) {
-                    _this2.setState({
-                      loading: true
-                    });
-
                     _this2.get();
 
                     _this2.$swal({
@@ -12071,6 +12069,14 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
 //
 //
 //
@@ -12100,18 +12106,44 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   methods: {
-    getBuses: function getBuses() {
-      var _this = this;
+    getBuses: function () {
+      var _getBuses = _asyncToGenerator(
+      /*#__PURE__*/
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
+        var _this = this;
 
-      fetch("/api/busses").then(function (res) {
-        return res.json();
-      }).then(function (res) {
-        _this.data = res;
-        _this.loading = false;
-      })["catch"](function (error) {
-        _this.error = error;
-        _this.loading = false;
-      });
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                this.loading = true;
+                _context.next = 3;
+                return fetch("/api/busses").then(function (res) {
+                  return res.json();
+                }).then(function (res) {
+                  _this.data = res;
+                  _this.loading = false;
+                })["catch"](function (error) {
+                  _this.error = error;
+                  _this.loading = false;
+                });
+
+              case 3:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee, this);
+      }));
+
+      function getBuses() {
+        return _getBuses.apply(this, arguments);
+      }
+
+      return getBuses;
+    }(),
+    update: function update() {
+      this.getBuses();
     },
     inserted: function inserted() {
       this.loading = true;
@@ -49692,7 +49724,7 @@ var render = function() {
     "div",
     { staticClass: "container" },
     [
-      _c("BusForm", { attrs: { form: _vm.form } }),
+      _c("BusForm", { attrs: { form: _vm.form }, on: { update: _vm.update } }),
       _vm._v(" "),
       _c("br"),
       _vm._v(" "),
@@ -49716,7 +49748,13 @@ var render = function() {
             return _c(
               "div",
               { key: bus.id },
-              [_c("BusInfo", { key: bus.id, attrs: { info: bus } })],
+              [
+                _c("BusInfo", {
+                  key: bus.id,
+                  attrs: { info: bus },
+                  on: { update: _vm.update }
+                })
+              ],
               1
             )
           })
