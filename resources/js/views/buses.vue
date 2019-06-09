@@ -2,13 +2,13 @@
   <div class="container">
     <BusForm :form="form"></BusForm>
     <br>
-    <div class="d-flex justify-content-center" v-if="this.loading">
+    <div class="d-flex justify-content-center" v-if="this.loading" :inserted="this.inserted()">
       <Loading/>
     </div>
     <div class="d-flex justify-content-center" v-else-if="this.error">
       <h2>Ha ocurrido un error {{this.error.message}}</h2>
     </div>
-    <div v-else v-for="bus in data" v-bind:key="bus">
+    <div v-else v-for="bus in data" v-bind:key="bus.id">
       <BusInfo :key="bus.id" :info="bus"></BusInfo>
     </div>
   </div>
@@ -37,7 +37,10 @@ export default {
           this.loading = false;
         });
     },
-    save() {}
+    inserted() {
+      this.loading = true;
+      this.getBuses();
+    }
   },
   mounted() {
     this.getBuses();
