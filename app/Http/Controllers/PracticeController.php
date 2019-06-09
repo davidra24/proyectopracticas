@@ -104,8 +104,7 @@ class PracticeController extends Controller
     public function destroy($practice)
     {
         $data= Practice::find($practice);
-        $MngPractice=ManagePractice::where('id_practice', $data->id);
-        $MngPractice->practice()->detach($data->id);
+        $data->managePractice()-delete();
         $data->delete();
             
         

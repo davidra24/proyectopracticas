@@ -98,8 +98,7 @@ class StudentController extends Controller
     public function destroy($student)
     {
         $data = Student::find($student);
-        $MngPractice=ManagePractice::where('id_student', $data->id);
-        $MngPractice->student()->detach($data->id);              
+        $data->managePractice()-delete();           
         $data->delete();
     }
 }

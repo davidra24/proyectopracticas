@@ -97,8 +97,7 @@ class BusseController extends Controller
     public function destroy($busse)
     {
         $data = Busse::find($busse);
-        $MngPractice=ManagePractice::where('id_bus', $data->id);
-        $MngPractice->busse()->detach($data->id);
+        $data->managePractice()-delete();
         $data->delete();
         
        
