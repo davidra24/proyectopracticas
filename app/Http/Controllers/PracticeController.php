@@ -108,6 +108,6 @@ class PracticeController extends Controller
         $MngPractice->practice()->detach($data->id);
         $data->delete();
             
-        }
+        
     }
 }
