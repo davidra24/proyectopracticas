@@ -96,11 +96,9 @@ class BusseController extends Controller
     public function destroy($busse)
     {
         $data = Busse::find($busse);
-        if ($data == null) {
-            return null;
-        } else {
-            $data->delete();
-            return true;
-        }
+              
+        $data->delete();
+        
+       
     }
 }

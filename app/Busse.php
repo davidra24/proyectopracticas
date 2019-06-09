@@ -9,6 +9,6 @@ class Busse extends Model
     protected $fillable = ['conductor', 'number_passagers', 'type'];
     public function managePractice()
     {
-        return $this->hasMany(ManagePractice::class, 'id_bus', 'id');
+        return $this->hasOne(ManagePractice::class, 'id_bus', 'id');
     }
 }
