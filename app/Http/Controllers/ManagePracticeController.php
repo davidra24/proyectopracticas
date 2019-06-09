@@ -42,7 +42,10 @@ class ManagePracticeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        
+        $managePractice = ManagePractice::create($request->all());
+        $managePractice->save();
+        return response()->json($managePractice);
     }
 
     /**
@@ -51,9 +54,10 @@ class ManagePracticeController extends Controller
      * @param  \App\ManagePractice  $managePractice
      * @return \Illuminate\Http\Response
      */
-    public function show(ManagePractice $managePractice)
+    public function show($managePractice)
     {
-        //
+        $data = ManagePractice::find($busse);
+        return response()->json($data);
     }
 
     /**
@@ -74,9 +78,16 @@ class ManagePracticeController extends Controller
      * @param  \App\ManagePractice  $managePractice
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, ManagePractice $managePractice)
+    public function update(Request $request, $managePractice)
     {
-        //
+        $data = ManagePractice::find($managePractice);
+        if ($data == null) {
+            return null;
+        } else {
+            $data->fill($request->all());
+            $data->save();
+            return response()->json($data);
+        }
     }
 
     /**
@@ -85,8 +96,17 @@ class ManagePracticeController extends Controller
      * @param  \App\ManagePractice  $managePractice
      * @return \Illuminate\Http\Response
      */
-    public function destroy(ManagePractice $managePractice)
+    public function destroy($managePractice)
     {
-        //
+        $data = ManagePractice::find($managePractice);
+        $MngPracticeB=ManagePractice::where('id_bus', $data->id);
+        $MngPracticeB->busse()->detach($data->id);
+        $MngPracticeE=ManagePractice::where('id_student', $data->id);
+        $MngPracticeE->student()->detach($data->id);
+        $MngPracticeP=ManagePractice::where('id_practice', $data->id);
+        $MngPracticeP->practice()->detach($data->id);
+        $MngPracticeT=ManagePractice::where('id_teacher', $data->id);
+        $MngPracticeT->teacher()->detach($data->id);
+        $data->delete();
     }
 }

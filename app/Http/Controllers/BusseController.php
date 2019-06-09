@@ -41,6 +41,7 @@ class BusseController extends Controller
      */
     public function store(Request $request)
     {
+        
         $busse = Busse::create($request->all());
         $busse->save();
         return response()->json($busse);
@@ -96,7 +97,8 @@ class BusseController extends Controller
     public function destroy($busse)
     {
         $data = Busse::find($busse);
-              
+        $MngPractice=ManagePractice::where('id_bus', $data->id);
+        $MngPractice->busse()->detach($data->id);
         $data->delete();
         
        

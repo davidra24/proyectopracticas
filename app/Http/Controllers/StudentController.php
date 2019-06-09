@@ -12,11 +12,18 @@ class StudentController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    private $student;
+    public function __construct(Student $student)
     {
-        //
+        $this->student = $student;
     }
 
+    public function index()
+    {
+        $data = $this->student::all();
+
+        return response()->json($data);
+    }
     /**
      * Show the form for creating a new resource.
      *
@@ -35,7 +42,9 @@ class StudentController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $student = Student::create($request->all());
+        $student->save();
+        return response()->json($student);
     }
 
     /**
@@ -44,9 +53,10 @@ class StudentController extends Controller
      * @param  \App\Student  $student
      * @return \Illuminate\Http\Response
      */
-    public function show(Student $student)
+    public function show($student)
     {
-        //
+        $data = Student::find($student);
+        return response()->json($data);
     }
 
     /**
@@ -67,9 +77,16 @@ class StudentController extends Controller
      * @param  \App\Student  $student
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Student $student)
+    public function update(Request $request, $student)
     {
-        //
+        $data = Student::find($student);
+        if ($data == null) {
+            return null;
+        } else {
+            $data->fill($request->all());
+            $data->save();
+            return response()->json($data);
+        }
     }
 
     /**
@@ -78,8 +95,11 @@ class StudentController extends Controller
      * @param  \App\Student  $student
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Student $student)
+    public function destroy($student)
     {
-        //
+        $data = Student::find($student);
+        $MngPractice=ManagePractice::where('id_student', $data->id);
+        $MngPractice->student()->detach($data->id);              
+        $data->delete();
     }
 }
