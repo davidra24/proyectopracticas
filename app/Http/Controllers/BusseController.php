@@ -12,9 +12,15 @@ class BusseController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    private $busse;
+    public function __construct(Busse $busse){
+        $this->busse=$busse;
+
+    }
     public function index()
     {
-        return Busse::all();
+        $busses= ['data'=>$this->busse::all()];
+        return response()->json($busses);
     }
 
     /**
@@ -24,7 +30,7 @@ class BusseController extends Controller
      */
     public function create()
     {
-        //
+        
     }
 
     /**
@@ -34,8 +40,17 @@ class BusseController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
-        //
+    {   
+        $search=Busse::find($request->id);
+        if($search==null){
+            $busse= Busse::create($request->all());
+            $busse->save();
+            return response()->json($busse);
+        }
+        else{
+            
+            return null;
+        }
     }
 
     /**
@@ -44,9 +59,12 @@ class BusseController extends Controller
      * @param  \App\Busse  $busse
      * @return \Illuminate\Http\Response
      */
-    public function show(Busse $busse)
+    public function show($busse)
     {
-        return $busse;
+        
+        $data= Busse::find($busse);
+        $busse=['data'=>$data];
+        return response()->json($busse);
     }
 
     /**
@@ -57,7 +75,7 @@ class BusseController extends Controller
      */
     public function edit(Busse $busse)
     {
-        //
+        
     }
 
     /**
@@ -69,7 +87,16 @@ class BusseController extends Controller
      */
     public function update(Request $request, Busse $busse)
     {
-        //
+        $data= Busse::find($busse);
+        if($data==null){
+            return null;
+        }
+        else{
+            $data->fill($request->all());
+            $data->save();
+            $busse=['data'=>$data];
+            return response()->json($busse);
+        }
     }
 
     /**
@@ -79,7 +106,14 @@ class BusseController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function destroy(Busse $busse)
-    {
-        //
+    {   
+        $data= Busse::find($busse);
+        if($data==null){
+            return null;
+        }
+        else{
+            $data->delete();
+            return true;
+        }
     }
 }

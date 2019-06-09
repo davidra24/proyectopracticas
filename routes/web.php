@@ -24,6 +24,11 @@ Route::group(
             'uses' => 'AdminController@index',
             'as' => 'admin.index'
         ]);
+        Route::get('/estudiantes', 'AdminController@estudiantes');
+        Route::get('/practicas', 'AdminController@practicas');
+        Route::get('/docentes', 'AdminController@docentes');
+        Route::get('/buses', 'AdminController@buses');
+        
     }
 );
 Route::group(
@@ -33,18 +38,15 @@ Route::group(
             'uses' => 'UserController@index',
             'as' => 'user.index'
         ]);
+        
+        Route::get('/reportes', 'UserController@reportes');
     }
 );
 
 Route::get('/', 'WelcomeController@index');
 
-Route::get('/admin', 'AdminController@index');
-Route::get('/admin/estudiantes', 'AdminController@estudiantes');
-Route::get('/admin/practicas', 'AdminController@practicas');
-Route::get('/admin/docentes', 'AdminController@docentes');
-Route::get('/admin/buses', 'AdminController@buses');
-Route::get('/user', 'UserController@index');
-Route::get('/user/reportes', 'UserController@reportes');
+
+
 
 Auth::routes();
 
