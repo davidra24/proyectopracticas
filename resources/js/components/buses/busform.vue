@@ -14,7 +14,7 @@
         >
       </div>
       <div class="col-12 col-md-3">
-        <input class="form-control" placeholder="nombre" type="text" v-model="form.tipo">
+        <input class="form-control" placeholder="tipo" type="text" v-model="form.tipo">
       </div>
       <div class="col-12 col-md-3">
         <button type="submit" class="form-control btn btn-success">Guardar</button>

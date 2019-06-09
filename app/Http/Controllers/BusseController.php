@@ -20,6 +20,7 @@ class BusseController extends Controller
     public function index()
     {
         $busses = $this->busse::all();
+
         return response()->json($busses);
     }
 
@@ -59,8 +60,7 @@ class BusseController extends Controller
     public function show($busse)
     {
         $data = Busse::find($busse);
-        $busse = [$data];
-        return response()->json($busse);
+        return response()->json($data);
     }
 
     /**
@@ -80,7 +80,7 @@ class BusseController extends Controller
      * @param  \App\Busse  $busse
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Busse $busse)
+    public function update(Request $request, $busse)
     {
         $data = Busse::find($busse);
         if ($data == null) {
@@ -88,8 +88,7 @@ class BusseController extends Controller
         } else {
             $data->fill($request->all());
             $data->save();
-            $busse = $data;
-            return response()->json($busse);
+            return response()->json($data);
         }
     }
 
@@ -99,7 +98,7 @@ class BusseController extends Controller
      * @param  \App\Busse  $busse
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Busse $busse)
+    public function destroy($busse)
     {
         $data = Busse::find($busse);
         if ($data == null) {

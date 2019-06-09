@@ -5,12 +5,17 @@
       <p v-else>{{info.conductor}}</p>
     </div>
     <div class="col-12 col-md-3 p-3 mb-2 bg-info text-white">
-      <input v-if="editMode" class="form-control" placeholder="conductor" v-model="info.pasajeros">
-      <p v-else>{{info.pasajeros}}</p>
+      <input
+        v-if="editMode"
+        class="form-control"
+        placeholder="conductor"
+        v-model="info.number_passagers"
+      >
+      <p v-else>{{info.number_passagers}}</p>
     </div>
     <div class="col-12 col-md-3 p-3 mb-2 bg-info text-white">
-      <input v-if="editMode" class="form-control" placeholder="conductor" v-model="info.tipo">
-      <p v-else>{{info.tipo}}</p>
+      <input v-if="editMode" class="form-control" placeholder="conductor" v-model="info.type">
+      <p v-else>{{info.type}}</p>
     </div>
     <div class="col-6 col-md-1">
       <br>

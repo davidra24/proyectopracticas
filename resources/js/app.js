@@ -1,5 +1,6 @@
 import './bootstrap';
 import '../../public/css/styles.css';
+import '../../public/css/loading.css';
 import Vue from 'vue';
 
 window.Vue = Vue;
@@ -14,6 +15,9 @@ import Estudiantes from './views/estudiantes.vue';
 import Practicas from './views/practicas.vue';
 import DocenteInfo from './components/docentes/docenteinfo.vue';
 import DocenteForm from './components/docentes/docenteform.vue';
+import BusInfo from './components/buses/businfo.vue';
+import BusForm from './components/buses/busform.vue';
+import Loading from './components/loading/loading.vue';
 import Docentes from './views/docentes.vue';
 import Buses from './views/buses.vue';
 import UserPanel from './views/userpanel';
@@ -26,6 +30,9 @@ library.add(faEdit, faTrash, faCheck);
 Vue.component('font-awesome-icon', FontAwesomeIcon);
 Vue.component('DocenteInfo', DocenteInfo);
 Vue.component('DocenteForm', DocenteForm);
+Vue.component('BusInfo', BusInfo);
+Vue.component('Loading', Loading);
+Vue.component('BusForm', BusForm);
 
 const app = new Vue({
     el: '#app',
@@ -37,7 +44,10 @@ const app = new Vue({
         estudiantes: Estudiantes,
         docenteinfo: DocenteInfo,
         docenteform: DocenteForm,
+        businfo: BusInfo,
+        busform: BusForm,
         docentes: Docentes,
+        loading: Loading,
         buses: Buses,
         userpanel: UserPanel,
         reportes: Reportes

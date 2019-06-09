@@ -19,7 +19,7 @@ class PracticeController extends Controller
     }
     public function index()
     {
-        $practice= ['data'=>$this->practice::all()];
+        $practice=$this->practice::all();
         return response()->json($practice);
     }
 
@@ -62,7 +62,7 @@ class PracticeController extends Controller
     public function show($practice)
     {
         $data= Practice::find($practice);
-        $practice=['data'=>$data];
+       
         return response()->json($practice);
     }
 
@@ -84,7 +84,7 @@ class PracticeController extends Controller
      * @param  \App\Practice  $practice
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Practice $practice)
+    public function update(Request $request, $practice)
     {
         $data= Practice::find($practice);
         if($data==null){
@@ -93,7 +93,7 @@ class PracticeController extends Controller
         else{
             $data->fill($request->all());
             $data->save();
-            $practice=['data'=>$data];
+            $practice=$data;
             return response()->json($practice);
         }
     }
@@ -104,7 +104,7 @@ class PracticeController extends Controller
      * @param  \App\Practice  $practice
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Practice $practice)
+    public function destroy($practice)
     {
         $data= Practice::find($practice);
         if($data==null){
