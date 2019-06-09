@@ -41,14 +41,9 @@ class BusseController extends Controller
      */
     public function store(Request $request)
     {
-        $search = Busse::find($request->id);
-        if ($search == null) {
-            $busse = Busse::create($request->all());
-            $busse->save();
-            return response()->json($busse);
-        } else {
-            return null;
-        }
+        $busse = Busse::create($request->all());
+        $busse->save();
+        return response()->json($busse);
     }
 
     /**

@@ -12,6 +12,7 @@ class PracticeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    private $practice;
 
     public function __construct(Practice $practice){
         $this->practice=$practice;

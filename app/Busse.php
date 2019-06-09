@@ -6,8 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Busse extends Model
 {
-    
-    public function managePractice(){
-        return $this->hasMany(ManagePractice::class,'id_bus','id');
+    protected $fillable = ['conductor', 'number_passagers', 'type'];
+    public function managePractice()
+    {
+        return $this->hasMany(ManagePractice::class, 'id_bus', 'id');
     }
 }
