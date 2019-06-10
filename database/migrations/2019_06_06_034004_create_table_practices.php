@@ -16,8 +16,22 @@ class CreateTablePractices extends Migration
         Schema::create('practices', function (Blueprint $table) {
             $table->dropPrimary('cart_line_pkey');
             $table->bigIncrements('id')->primary();
+            $table->date('date_practice');
             $table->text('place');
+            $table->integer('id_teacher');
+            $table->integer('id_bus');
             $table->timestamps();
+
+            $table
+                ->foreign('id_teacher')
+                ->references('id')
+                ->on('teachers')
+                ->onDelete('cascade');
+            $table
+                ->foreign('id_bus')
+                ->references('id')
+                ->on('busses')
+                ->onDelete('cascade');
         });
     }
 

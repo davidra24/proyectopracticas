@@ -71,7 +71,6 @@ export default {
       this.editMode = true;
     },
     async updateBuses() {
-      this.loading = true;
       await fetch(`/api/busses/${this.id}`, {
         method: "PUT",
         body: JSON.stringify(this.info),

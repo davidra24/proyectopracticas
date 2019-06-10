@@ -11718,8 +11718,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                this.loading = true;
-                _context.next = 3;
+                _context.next = 2;
                 return fetch("/api/busses/".concat(this.id), {
                   method: "PUT",
                   body: JSON.stringify(this.info),
@@ -11756,7 +11755,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   }
                 });
 
-              case 3:
+              case 2:
               case "end":
                 return _context.stop();
             }
