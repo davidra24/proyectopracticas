@@ -56,7 +56,7 @@ class ManagePracticeController extends Controller
      */
     public function show($managePractice)
     {
-        $data = ManagePractice::find($busse);
+        $data = ManagePractice::find($managePractice);
         return response()->json($data);
     }
 
@@ -98,15 +98,8 @@ class ManagePracticeController extends Controller
      */
     public function destroy($managePractice)
     {
-        $data = ManagePractice::find($managePractice);
-        $MngPracticeB=ManagePractice::where('id_bus', $data->id);
-        $MngPracticeB->busse()->detach($data->id);
-        $MngPracticeE=ManagePractice::where('id_student', $data->id);
-        $MngPracticeE->student()->detach($data->id);
-        $MngPracticeP=ManagePractice::where('id_practice', $data->id);
-        $MngPracticeP->practice()->detach($data->id);
-        $MngPracticeT=ManagePractice::where('id_teacher', $data->id);
-        $MngPracticeT->teacher()->detach($data->id);
+        $data = ManagePractice::find($managePractice->id_practice);
+        $MngPracticeE->sessions()->sync([]);        
         $data->delete();
     }
 }

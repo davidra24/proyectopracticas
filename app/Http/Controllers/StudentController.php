@@ -98,7 +98,7 @@ class StudentController extends Controller
     public function destroy($student)
     {
         $data = Student::find($student);
-        $data->managePractice()-delete();           
+        $data->managePractice()->delete();           
         $data->delete();
     }
 }

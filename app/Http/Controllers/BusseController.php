@@ -97,7 +97,7 @@ class BusseController extends Controller
     public function destroy($busse)
     {
         $data = Busse::find($busse);
-        $data->managePractice()-delete();
+        $data->practice()->delete();
         $data->delete();
         
        
