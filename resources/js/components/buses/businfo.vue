@@ -14,8 +14,11 @@
       <p v-else>{{this.form.conductor}}</p>
     </div>
     <div class="col-12 col-md-3 p-3 mb-2 bg-info text-white">
+      <div class="d-flex justify-content-center" v-if="this.loading">
+        <MiniLoading/>
+      </div>
       <input
-        v-if="editMode"
+        v-else-if="editMode"
         class="form-control"
         placeholder="conductor"
         type="number"
@@ -24,8 +27,11 @@
       <p v-else>{{this.form.number_passagers}}</p>
     </div>
     <div class="col-12 col-md-3 p-3 mb-2 bg-info text-white">
+      <div class="d-flex justify-content-center" v-if="this.loading">
+        <MiniLoading/>
+      </div>
       <input
-        v-if="editMode"
+        v-else-if="editMode"
         class="form-control"
         placeholder="conductor"
         v-model="info.type"

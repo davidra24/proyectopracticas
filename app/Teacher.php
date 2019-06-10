@@ -6,9 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Teacher extends Model
 {
-    protected $fillable = ['name'];
-    public function managePractice()
+    protected $fillable = ['id', 'name'];
+    public function practice()
     {
-        return $this->hasOne(ManagePractice::class, 'id_teacher', 'id');
+        return $this->hasOne(Practice::class, 'id_teacher', 'id');
     }
 }

@@ -9,6 +9,7 @@ window.Vue = Vue;
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faEdit, faTrash, faCheck } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
+import Datepicker from 'vuejs-datepicker';
 
 import Login from './views/login.vue';
 import AdminPanel from './views/adminpanel.vue';
@@ -34,6 +35,7 @@ import VueSweetalert2 from 'vue-sweetalert2';
 Vue.use(VueSweetalert2);
 library.add(faEdit, faTrash, faCheck);
 Vue.component('font-awesome-icon', FontAwesomeIcon);
+Vue.component('datepicker', Datepicker);
 Vue.component('DocenteInfo', DocenteInfo);
 Vue.component('DocenteForm', DocenteForm);
 Vue.component('BusInfo', BusInfo);
@@ -50,6 +52,7 @@ const app = new Vue({
     router,
     components: {
         login: Login,
+        datepicker: Datepicker,
         adminpanel: AdminPanel,
         practicas: Practicas,
         estudiantes: Estudiantes,

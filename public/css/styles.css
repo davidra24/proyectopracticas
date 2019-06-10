@@ -3,3 +3,9 @@
     padding-left: 8%;
     padding-right: 8%;
 }
+.top-buffer {
+    margin-top: 0.5%;
+}
+.top-buffer-btn {
+    margin-top: 3%;
+}

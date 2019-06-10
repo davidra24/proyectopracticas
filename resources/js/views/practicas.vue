@@ -1,24 +1,24 @@
 <template>
   <div class="container">
-    <form action class="form-group" @submit.prevent="save()">
-      <br>
-      <div class="row">
-        <div class="col-12 col-md-4">
-          <input class="form-control" placeholder="codigo" type="number" v-model="form.id">
-        </div>
-        <div class="col-12 col-md-4">
-          <input class="form-control" placeholder="lugar" type="text" v-model="form.lugar">
-        </div>
-        <div class="col-12 col-md-4">
-          <button type="submit" class="form-control btn btn-success">Guardar</button>
-        </div>
-      </div>
-    </form>
+    <div class="d-flex justify-content-center" v-if="this.loadingTeachers&&this.loadingBusses">
+      <MiniLoading/>
+    </div>
+    <PracticaForm v-else :teachers="this.teachers" :busses="this.busses" @update="update"></PracticaForm>
     <br>
-    <div class="col-12">
-      <div v-for="practica in data">
-        <div v-bind:id="practica.id" class="p-3 mb-2 bg-info text-white">{{practica.lugar}}</div>
-      </div>
+    <div class="d-flex justify-content-center" v-if="this.loading">
+      <Loading/>
+    </div>
+    <div class="d-flex justify-content-center" v-else-if="this.error">
+      <h2>Ha ocurrido un error {{this.error.message}}</h2>
+    </div>
+    <div v-else v-for="practica in data" v-bind:key="practica.id">
+      <PracticaInfo
+        :teachers="teachers"
+        :busses="busses"
+        :key="practica.id"
+        :info="practica"
+        @update="update"
+      ></PracticaInfo>
     </div>
   </div>
 </template>
@@ -27,32 +27,61 @@
 export default {
   data() {
     return {
-      loading: false,
-      data: [
-        {
-          id: 1,
-          lugar: "Cali"
-        },
-        {
-          id: 2,
-          lugar: "Medellin"
-        },
-        {
-          id: 3,
-          lugar: "Bogotá"
-        }
-      ],
-      form: { id: "", lugar: "" },
-      error: null
+      loading: true,
+      data: [],
+      error: null,
+      teachers: [],
+      busses: [],
+      loadingBusses: true,
+      loadingTeachers: true
     };
   },
   methods: {
-    save() {
-      alert(this.form.id + this.form.lugar);
+    async getPractices() {
+      await fetch("/api/practices")
+        .then(res => res.json())
+        .then(res => {
+          this.data = res;
+          this.loading = false;
+        })
+        .catch(error => {
+          this.error = error;
+          this.loading = false;
+        });
+    },
+    update() {
+      this.loading = true;
+      this.getPractices();
+    },
+    async getBuses() {
+      await fetch("/api/busses")
+        .then(res => res.json())
+        .then(res => {
+          this.busses = res;
+          this.loadingBusses = false;
+        })
+        .catch(error => {
+          this.error = error;
+          this.loadingBusses = false;
+        });
+    },
+    async getTeachers() {
+      await fetch("/api/teachers")
+        .then(res => res.json())
+        .then(res => {
+          this.teachers = res;
+          this.loadingTeachers = false;
+        })
+        .catch(error => {
+          this.error = error;
+          this.loadingTeachers = false;
+        });
     }
   },
   mounted() {
-    console.log("Component mounted.");
+    this.getTeachers();
+    this.getBuses();
+    this.getPractices();
   }
 };
 </script>

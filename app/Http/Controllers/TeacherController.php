@@ -98,7 +98,7 @@ class TeacherController extends Controller
     public function destroy($teacher)
     {
         $data = Teacher::find($teacher);
-        $data->managePractice()->delete();
+        $data->practice()->delete();
         $data->delete();
     }
 }
