@@ -7,7 +7,7 @@
     <div v-else class="row">
       <div class="col-12 col-md-8">
         <label for="lugar">Estudiante:</label>
-        <select class="form-control" placeholder="Docente" type="text" v-model="form.id">
+        <select class="form-control" placeholder="Docente" type="text" v-model="form.id_student">
           <option
             v-for="student in students"
             :value="student.id"
@@ -24,16 +24,63 @@
 
 <script>
 export default {
-  props: ["students", "load"],
+  props: ["students", "load", "id"],
   data() {
     return {
       form: {
-        id: this.students.id,
-        name: this.students.name
+        id_student: "",
+        id_practice: this.id
       },
       data: [],
       error: null
     };
+  },
+  methods: {
+    async postManagePractice() {
+      this.handleLoad();
+      await fetch("/api/managePractices", {
+        method: "POST",
+        body: JSON.stringify(this.form),
+        headers: {
+          "Content-Type": "application/json"
+        }
+      }).then(response => {
+        if (response.status === 200) {
+          this.handleLoad();
+          this.clear();
+          this.get();
+          this.$swal({
+            position: "top-end",
+            title: "Guardado!",
+            text: "Su dato ha sido guardado satisfactoriamente",
+            type: "success",
+            showConfirmButton: false,
+            timer: 1500
+          });
+        } else {
+          this.handleLoad();
+          this.$swal({
+            position: "top-end",
+            title: "Error!",
+            text: `No se ha podido guardar sus datos, codigo de error: ${
+              response.status
+            }`,
+            type: "error",
+            showConfirmButton: false,
+            timer: 1500
+          });
+        }
+      });
+    },
+    clear() {
+      this.form.id_student = "";
+    },
+    handleLoad() {
+      this.$emit("handleLoad", null);
+    },
+    get() {
+      this.$emit("update", null);
+    }
   },
   mounted() {}
 };

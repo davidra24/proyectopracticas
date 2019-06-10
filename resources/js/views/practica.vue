@@ -20,7 +20,23 @@
         <Strong>Docente: {{this.data.name}}</Strong>
       </div>
     </div>
-    <ManagePracticesForm :load="this.load" :students="this.students"/>
+    <ManagePracticesForm
+      @handleLoad="this.handleLoad"
+      @update="this.update"
+      :id="this.id"
+      :load="this.load"
+      :students="this.students"
+    />
+    <div class="col-12 d-flex justify-content-center" v-if="loader">
+      <Loading/>
+    </div>
+    <div v-else v-for="managePractices in practices" v-bind:key="managePractices.id_student">
+      <ManagePracticesInfo
+        :key="managePractices.id_student"
+        :info="managePractices"
+        @update="update"
+      />
+    </div>
   </div>
 </template>
 
@@ -30,8 +46,10 @@ export default {
     return {
       data: [],
       students: [],
+      practices: [],
       load: true,
       error: null,
+      loader: true,
       loading: true,
       id: window.location.href
         .toString()
@@ -62,9 +80,29 @@ export default {
           this.error = error;
           this.load = false;
         });
+    },
+    async getManagePractices() {
+      await fetch(`/api/managePractices/${this.id}`)
+        .then(res => res.json())
+        .then(res => {
+          this.practices = res;
+          this.loader = false;
+        })
+        .catch(error => {
+          this.error = error;
+          this.loader = false;
+        });
+    },
+    update() {
+      this.loader = true;
+      this.getManagePractices();
+    },
+    handleLoad() {
+      this.load = !this.load;
     }
   },
   mounted() {
+    this.getManagePractices();
     this.getPractice();
     this.getStudents();
   }

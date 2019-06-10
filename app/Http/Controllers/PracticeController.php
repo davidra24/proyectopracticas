@@ -102,11 +102,7 @@ class PracticeController extends Controller
     public function destroy($practice)
     {
         $data = Practice::find($practice);
-        $teacher = $data->id_teacher;
-        $bus = $data->id_bus;
         $data->managePractice()->delete();
-        $data->teacher()->detach($teacher);
-        $data->bus()->detach($bus);
         $data->delete();
     }
 }

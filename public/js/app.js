@@ -12638,6 +12638,14 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
 //
 //
 //
@@ -12663,16 +12671,89 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ["students", "load"],
+  props: ["students", "load", "id"],
   data: function data() {
     return {
       form: {
-        id: this.students.id,
-        name: this.students.name
+        id_student: "",
+        id_practice: this.id
       },
       data: [],
       error: null
     };
+  },
+  methods: {
+    postManagePractice: function () {
+      var _postManagePractice = _asyncToGenerator(
+      /*#__PURE__*/
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
+        var _this = this;
+
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                this.handleLoad();
+                _context.next = 3;
+                return fetch("/api/managePractices", {
+                  method: "POST",
+                  body: JSON.stringify(this.form),
+                  headers: {
+                    "Content-Type": "application/json"
+                  }
+                }).then(function (response) {
+                  if (response.status === 200) {
+                    _this.handleLoad();
+
+                    _this.clear();
+
+                    _this.get();
+
+                    _this.$swal({
+                      position: "top-end",
+                      title: "Guardado!",
+                      text: "Su dato ha sido guardado satisfactoriamente",
+                      type: "success",
+                      showConfirmButton: false,
+                      timer: 1500
+                    });
+                  } else {
+                    _this.handleLoad();
+
+                    _this.$swal({
+                      position: "top-end",
+                      title: "Error!",
+                      text: "No se ha podido guardar sus datos, codigo de error: ".concat(response.status),
+                      type: "error",
+                      showConfirmButton: false,
+                      timer: 1500
+                    });
+                  }
+                });
+
+              case 3:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee, this);
+      }));
+
+      function postManagePractice() {
+        return _postManagePractice.apply(this, arguments);
+      }
+
+      return postManagePractice;
+    }(),
+    clear: function clear() {
+      this.form.id_student = "";
+    },
+    handleLoad: function handleLoad() {
+      this.$emit("handleLoad", null);
+    },
+    get: function get() {
+      this.$emit("update", null);
+    }
   },
   mounted: function mounted() {}
 });
@@ -12688,9 +12769,111 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
 //
 //
-/* harmony default export */ __webpack_exports__["default"] = ({});
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  props: ["info"],
+  methods: {
+    remove: function () {
+      var _remove = _asyncToGenerator(
+      /*#__PURE__*/
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
+        var _this = this;
+
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                this.loading = true;
+                _context.next = 3;
+                return fetch("/api/managePractices/".concat(this.info.id_practice, "/").concat(this.info.id_student), {
+                  method: "DELETE",
+                  headers: {
+                    "Content-Type": "application/json"
+                  }
+                }).then(function (res) {
+                  if (res.status === 200) {
+                    _this.get();
+
+                    _this.$swal({
+                      position: "top-end",
+                      type: "success",
+                      title: "Se ha eliminado el dato satsfactoriamente",
+                      showConfirmButton: false,
+                      timer: 1500
+                    });
+                  } else {
+                    _this.loading = false;
+
+                    _this.$swal({
+                      type: "error",
+                      position: "top-end",
+                      title: "Oops...",
+                      text: "No se ha podido eliminar el dato seleccionado",
+                      showConfirmButton: false,
+                      timer: 1500
+                    });
+                  }
+                });
+
+              case 3:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee, this);
+      }));
+
+      function remove() {
+        return _remove.apply(this, arguments);
+      }
+
+      return remove;
+    }(),
+    del: function del() {
+      var _this2 = this;
+
+      this.$swal({
+        title: "¿Está seguro?",
+        text: "¿Está seguro que desea elimiar este elemento?",
+        type: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#d33",
+        cancelButtonColor: "#3085d6",
+        confirmButtonText: "Sí",
+        cancelButtonText: "No"
+      }).then(function (result) {
+        if (result.value) {
+          _this2.remove();
+        }
+      });
+    },
+    get: function get() {
+      this.$emit("update", null);
+    }
+  },
+  mounted: function mounted() {}
+});
 
 /***/ }),
 
@@ -12861,6 +13044,7 @@ function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
+//
 //
 //
 //
@@ -13514,13 +13698,31 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       data: [],
       students: [],
+      practices: [],
       load: true,
       error: null,
+      loader: true,
       loading: true,
       id: window.location.href.toString().charAt(window.location.href.toString().length - 1)
     };
@@ -13595,9 +13797,52 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       }
 
       return getStudents;
-    }()
+    }(),
+    getManagePractices: function () {
+      var _getManagePractices = _asyncToGenerator(
+      /*#__PURE__*/
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3() {
+        var _this3 = this;
+
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee3$(_context3) {
+          while (1) {
+            switch (_context3.prev = _context3.next) {
+              case 0:
+                _context3.next = 2;
+                return fetch("/api/managePractices/".concat(this.id)).then(function (res) {
+                  return res.json();
+                }).then(function (res) {
+                  _this3.practices = res;
+                  _this3.loader = false;
+                })["catch"](function (error) {
+                  _this3.error = error;
+                  _this3.loader = false;
+                });
+
+              case 2:
+              case "end":
+                return _context3.stop();
+            }
+          }
+        }, _callee3, this);
+      }));
+
+      function getManagePractices() {
+        return _getManagePractices.apply(this, arguments);
+      }
+
+      return getManagePractices;
+    }(),
+    update: function update() {
+      this.loader = true;
+      this.getManagePractices();
+    },
+    handleLoad: function handleLoad() {
+      this.load = !this.load;
+    }
   },
   mounted: function mounted() {
+    this.getManagePractices();
     this.getPractice();
     this.getStudents();
   }
@@ -51436,8 +51681,8 @@ var render = function() {
                     {
                       name: "model",
                       rawName: "v-model",
-                      value: _vm.form.id,
-                      expression: "form.id"
+                      value: _vm.form.id_student,
+                      expression: "form.id_student"
                     }
                   ],
                   staticClass: "form-control",
@@ -51454,7 +51699,7 @@ var render = function() {
                         })
                       _vm.$set(
                         _vm.form,
-                        "id",
+                        "id_student",
                         $event.target.multiple
                           ? $$selectedVal
                           : $$selectedVal[0]
@@ -51516,7 +51761,30 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div")
+  return _c("div", { staticClass: "row" }, [
+    _c("div", { staticClass: "col-10 p-3 mb-2 bg-info text-white" }, [
+      _c("h4", [_vm._v(_vm._s(_vm.info.namestudent))])
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "col-2" }, [
+      _c("br"),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass: "btn btn-outline-danger",
+          attrs: { type: "button" },
+          on: {
+            click: function($event) {
+              return _vm.del()
+            }
+          }
+        },
+        [_c("font-awesome-icon", { attrs: { icon: "trash" } })],
+        1
+      )
+    ])
+  ])
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -51796,7 +52064,11 @@ var render = function() {
             )
           : _vm.editMode
           ? _c("datepicker", {
-              attrs: { "input-class": "form-control bg-white", name: "date" },
+              attrs: {
+                "input-class": "form-control bg-white",
+                "calendar-class": "text-dark",
+                name: "date"
+              },
               model: {
                 value: _vm.info.date_practice,
                 callback: function($$v) {
@@ -52401,10 +52673,33 @@ var render = function() {
       ),
       _vm._v(" "),
       _c("ManagePracticesForm", {
-        attrs: { load: this.load, students: this.students }
-      })
+        attrs: { id: this.id, load: this.load, students: this.students },
+        on: { handleLoad: this.handleLoad, update: this.update }
+      }),
+      _vm._v(" "),
+      _vm.loader
+        ? _c(
+            "div",
+            { staticClass: "col-12 d-flex justify-content-center" },
+            [_c("Loading")],
+            1
+          )
+        : _vm._l(_vm.practices, function(managePractices) {
+            return _c(
+              "div",
+              { key: managePractices.id_student },
+              [
+                _c("ManagePracticesInfo", {
+                  key: managePractices.id_student,
+                  attrs: { info: managePractices },
+                  on: { update: _vm.update }
+                })
+              ],
+              1
+            )
+          })
     ],
-    1
+    2
   )
 }
 var staticRenderFns = []

@@ -20,6 +20,7 @@
       <datepicker
         v-else-if="editMode"
         input-class="form-control bg-white"
+        calendar-class="text-dark"
         v-model="info.date_practice"
         name="date"
       />
