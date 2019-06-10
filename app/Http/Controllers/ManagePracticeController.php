@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\ManagePractice;
 use Illuminate\Http\Request;
-
+use App\ViewManagePractice;
 class ManagePracticeController extends Controller
 {
     /**
@@ -20,7 +20,7 @@ class ManagePracticeController extends Controller
     
      public function index()
     {
-        $data= $this->managePractice::all();
+        $data= ViewManagePractice::all();
         return response()->json($data);
     }
 
@@ -56,8 +56,12 @@ class ManagePracticeController extends Controller
      */
     public function show($managePractice)
     {
-        $data = ManagePractice::find($managePractice);
-        return response()->json($data);
+        $data = ViewManagePractice::where('id_practice',$managePractice)->get();
+        $array = array();
+        foreach($data as $t){
+            $array[] = $t;
+        }
+        return response()->json($array);
     }
 
     /**
@@ -96,10 +100,20 @@ class ManagePracticeController extends Controller
      * @param  \App\ManagePractice  $managePractice
      * @return \Illuminate\Http\Response
      */
-    public function destroy($managePractice)
+    public function destroy(Request $request)
     {
-        $data = ManagePractice::find($managePractice->id_practice);
-        $MngPracticeE->sessions()->sync([]);        
+        $view = ViewManagePractice::where('id_practice',$request->id_practice)->where('id_student',$request->id_student)->first();
+        $data=ManagePractice::where('id_practice',$request->id_practice)->where('id_student',$request->id_student)->first();
+        
+        $std=$view->id_student;
+        $teacher=$view->id_teacher;
+        $practice=$view->id_practice;
+        $data->student()->detach($std);
+        $data->teacher()->detach($teacher);
+        $data->practice()->detach($practice);
         $data->delete();
+        
+         
+        
     }
 }
