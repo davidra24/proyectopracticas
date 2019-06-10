@@ -1,6 +1,7 @@
 import './bootstrap';
 import '../../public/css/styles.css';
 import '../../public/css/loading.css';
+import '../../public/css/miniloading.css';
 import Vue from 'vue';
 
 window.Vue = Vue;
@@ -17,7 +18,12 @@ import DocenteInfo from './components/docentes/docenteinfo.vue';
 import DocenteForm from './components/docentes/docenteform.vue';
 import BusInfo from './components/buses/businfo.vue';
 import BusForm from './components/buses/busform.vue';
+import EstudianteInfo from './components/estudiantes/estudianteinfo.vue';
+import EstudianteForm from './components/estudiantes/estudianteform.vue';
+import PracticaInfo from './components/practicas/practicasinfo.vue';
+import PracticaForm from './components/practicas/practicasform.vue';
 import Loading from './components/loading/loading.vue';
+import MiniLoading from './components/loading/miniloading.vue';
 import Docentes from './views/docentes.vue';
 import Buses from './views/buses.vue';
 import UserPanel from './views/userpanel';
@@ -31,8 +37,13 @@ Vue.component('font-awesome-icon', FontAwesomeIcon);
 Vue.component('DocenteInfo', DocenteInfo);
 Vue.component('DocenteForm', DocenteForm);
 Vue.component('BusInfo', BusInfo);
-Vue.component('Loading', Loading);
 Vue.component('BusForm', BusForm);
+Vue.component('EstudianteInfo', EstudianteInfo);
+Vue.component('EstudianteForm', EstudianteForm);
+Vue.component('PracticaInfo', PracticaInfo);
+Vue.component('PracticaForm', PracticaForm);
+Vue.component('Loading', Loading);
+Vue.component('MiniLoading', MiniLoading);
 
 const app = new Vue({
     el: '#app',
@@ -46,8 +57,13 @@ const app = new Vue({
         docenteform: DocenteForm,
         businfo: BusInfo,
         busform: BusForm,
+        estudianteinfo: EstudianteInfo,
+        estudianteform: EstudianteForm,
+        practicainfo: PracticaInfo,
+        practicaform: PracticaForm,
         docentes: Docentes,
         loading: Loading,
+        miniloading: MiniLoading,
         buses: Buses,
         userpanel: UserPanel,
         reportes: Reportes

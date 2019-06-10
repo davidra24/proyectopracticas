@@ -17,12 +17,8 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::apiResource('busses','BusseController');
-Route::apiResource('practices','PracticeController');
-Route::apiResource('students','StudentController');
-Route::apiResource('teacher','TeacherController');
-Route::apiResource('managePractices','ManagePracticeController');
-
-
-
-
+Route::apiResource('busses', 'BusseController');
+Route::apiResource('practices', 'PracticeController');
+Route::apiResource('students', 'StudentController');
+Route::apiResource('teachers', 'TeacherController');
+Route::apiResource('managePractices', 'ManagePracticeController');

@@ -1,8 +1,11 @@
 <template>
   <div class="row">
     <div class="col-12 col-md-3 p-3 mb-2 bg-info text-white">
+      <div class="d-flex justify-content-center" v-if="this.loading">
+        <MiniLoading/>
+      </div>
       <input
-        v-if="editMode"
+        v-else-if="editMode"
         class="form-control"
         placeholder="conductor"
         v-model="info.conductor"
@@ -71,6 +74,7 @@ export default {
       this.editMode = true;
     },
     async updateBuses() {
+      this.loading = true;
       await fetch(`/api/busses/${this.id}`, {
         method: "PUT",
         body: JSON.stringify(this.info),
@@ -120,6 +124,7 @@ export default {
       this.$emit("update", null);
     },
     async remove() {
+      this.loading = true;
       await fetch(`/api/busses/${this.id}`, {
         method: "DELETE",
         headers: { "Content-Type": "application/json" }
@@ -134,6 +139,7 @@ export default {
             timer: 1500
           });
         } else {
+          this.loading = false;
           this.$swal({
             type: "error",
             position: "top-end",

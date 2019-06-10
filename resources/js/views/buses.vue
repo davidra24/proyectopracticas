@@ -1,8 +1,8 @@
 <template>
   <div class="container">
-    <BusForm :form="form" @update="update"></BusForm>
+    <BusForm @update="update"></BusForm>
     <br>
-    <div class="d-flex justify-content-center" v-if="this.loading" :inserted="this.inserted()">
+    <div class="d-flex justify-content-center" v-if="this.loading">
       <Loading/>
     </div>
     <div class="d-flex justify-content-center" v-else-if="this.error">
@@ -20,13 +20,11 @@ export default {
     return {
       loading: true,
       data: [],
-      form: { id: "", nombre: "" },
       error: null
     };
   },
   methods: {
     async getBuses() {
-      this.loading = true;
       await fetch("/api/busses")
         .then(res => res.json())
         .then(res => {
@@ -39,9 +37,6 @@ export default {
         });
     },
     update() {
-      this.getBuses();
-    },
-    inserted() {
       this.loading = true;
       this.getBuses();
     }

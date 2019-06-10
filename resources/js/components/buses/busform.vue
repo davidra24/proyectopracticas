@@ -2,7 +2,7 @@
   <form action class="form-group" @submit.prevent="postBusses()">
     <br>
     <div class="d-flex justify-content-center" v-if="this.loading">
-      <Loading/>
+      <MiniLoading/>
     </div>
     <div v-else class="row">
       <div class="col-12 col-md-3">
@@ -29,7 +29,7 @@
 
 <script>
 export default {
-  name: "docenteform",
+  name: "busform",
   data() {
     return {
       form: {
@@ -38,8 +38,7 @@ export default {
         type: ""
       },
       editMode: false,
-      loading: false,
-      error: null
+      loading: false
     };
   },
   methods: {
