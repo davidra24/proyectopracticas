@@ -42,10 +42,11 @@ class ManagePracticeController extends Controller
      */
     public function store(Request $request)
     {
+        $id_p=$request->id_practice;
+        $id_e=$request->id_student;
+        $mng=DB::table('manage_practices')->insert(['id_practice'=>$id_p,'id_student'=>$id_e]);
         
-        $managePractice = ManagePractice::create($request->all());
-        $managePractice->save();
-        return response()->json($managePractice);
+        return response()->json($mng);
     }
 
     /**
