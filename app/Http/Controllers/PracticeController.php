@@ -44,13 +44,9 @@ class PracticeController extends Controller
     {
         $search=Practice::find($request->id);
         if($search==null){
-            $practice= Practice::create($request->all());
-            $practice->save();
-            return response()->json($practice);
-        }
-        else{
-            
-            return null;
+        $practice= Practice::create($request->all());
+        $practice->save();
+        return response()->json($practice);
         }
     }
 
@@ -64,7 +60,7 @@ class PracticeController extends Controller
     {
         $data= Practice::find($practice);
        
-        return response()->json($practice);
+        return response()->json($data);
     }
 
     /**
@@ -108,12 +104,11 @@ class PracticeController extends Controller
     public function destroy($practice)
     {
         $data= Practice::find($practice);
-        if($data==null){
-            return null;
-        }
-        else{
-            $data->delete();
-            return true;
-        }
+        $data->managePractice()->delete();
+        $data->teacher()->delete();
+        $data->bus()->delete();
+        $data->delete();
+            
+        
     }
 }

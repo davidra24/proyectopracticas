@@ -42,7 +42,10 @@ class ManagePracticeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        
+        $managePractice = ManagePractice::create($request->all());
+        $managePractice->save();
+        return response()->json($managePractice);
     }
 
     /**
@@ -51,9 +54,10 @@ class ManagePracticeController extends Controller
      * @param  \App\ManagePractice  $managePractice
      * @return \Illuminate\Http\Response
      */
-    public function show(ManagePractice $managePractice)
+    public function show($managePractice)
     {
-        //
+        $data = ManagePractice::find($managePractice);
+        return response()->json($data);
     }
 
     /**
@@ -74,9 +78,16 @@ class ManagePracticeController extends Controller
      * @param  \App\ManagePractice  $managePractice
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, ManagePractice $managePractice)
+    public function update(Request $request, $managePractice)
     {
-        //
+        $data = ManagePractice::find($managePractice);
+        if ($data == null) {
+            return null;
+        } else {
+            $data->fill($request->all());
+            $data->save();
+            return response()->json($data);
+        }
     }
 
     /**
@@ -85,8 +96,10 @@ class ManagePracticeController extends Controller
      * @param  \App\ManagePractice  $managePractice
      * @return \Illuminate\Http\Response
      */
-    public function destroy(ManagePractice $managePractice)
+    public function destroy($managePractice)
     {
-        //
+        $data = ManagePractice::find($managePractice->id_practice);
+        $MngPracticeE->sessions()->sync([]);        
+        $data->delete();
     }
 }

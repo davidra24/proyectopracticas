@@ -12,9 +12,16 @@ class TeacherController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    private $teacher;
+    public function __construct(Teacher $teacher)
+    {
+        $this->teacher = $teacher;
+    }
     public function index()
     {
-        //
+        $data = $this->teacher::all();
+
+        return response()->json($data);
     }
 
     /**
@@ -35,7 +42,9 @@ class TeacherController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $teacher = Teacher::create($request->all());
+        $teacher->save();
+        return response()->json($teacher);
     }
 
     /**
@@ -44,9 +53,10 @@ class TeacherController extends Controller
      * @param  \App\Teacher  $teacher
      * @return \Illuminate\Http\Response
      */
-    public function show(Teacher $teacher)
+    public function show($teacher)
     {
-        //
+        $data = Teacher::find($teacher);
+        return response()->json($data);
     }
 
     /**
@@ -55,7 +65,7 @@ class TeacherController extends Controller
      * @param  \App\Teacher  $teacher
      * @return \Illuminate\Http\Response
      */
-    public function edit(Teacher $teacher)
+    public function edit($teacher)
     {
         //
     }
@@ -67,9 +77,16 @@ class TeacherController extends Controller
      * @param  \App\Teacher  $teacher
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Teacher $teacher)
+    public function update(Request $request, $teacher)
     {
-        //
+        $data = Teacher::find($teacher);
+        if ($data == null) {
+            return null;
+        } else {
+            $data->fill($request->all());
+            $data->save();
+            return response()->json($data);
+        }
     }
 
     /**
@@ -78,8 +95,10 @@ class TeacherController extends Controller
      * @param  \App\Teacher  $teacher
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Teacher $teacher)
+    public function destroy($teacher)
     {
-        //
+        $data = Teacher::find($teacher);
+        $data->managePractice()->delete();
+        $data->delete();
     }
 }

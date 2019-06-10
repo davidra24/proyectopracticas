@@ -19,6 +19,9 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::apiResource('busses','BusseController');
 Route::apiResource('practices','PracticeController');
+Route::apiResource('students','StudentController');
+Route::apiResource('teacher','TeacherController');
+Route::apiResource('managePractices','ManagePracticeController');
 
 
 

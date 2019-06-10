@@ -7,8 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 class Busse extends Model
 {
     protected $fillable = ['conductor', 'number_passagers', 'type'];
-    public function managePractice()
+    public function practice()
     {
-        return $this->hasOne(ManagePractice::class, 'id_bus', 'id');
+        return $this->hasOne(Practice::class, 'id_bus', 'id');
     }
 }
