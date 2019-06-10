@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Practice;
 use Illuminate\Http\Request;
-
+use App\viewPractice;
 class PracticeController extends Controller
 {
     /**
@@ -20,7 +20,7 @@ class PracticeController extends Controller
     }
     public function index()
     {
-        $practice=$this->practice::all();
+        $practice=viewPractice::all();
         return response()->json($practice);
     }
 
@@ -58,9 +58,9 @@ class PracticeController extends Controller
      */
     public function show($practice)
     {
-        $data= Practice::find($practice);
-       
+        $data= viewPractice::find($practice);       
         return response()->json($data);
+        
     }
 
     /**
