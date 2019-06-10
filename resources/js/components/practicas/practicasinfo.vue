@@ -29,22 +29,22 @@
       <div class="d-flex justify-content-center" v-if="this.loading">
         <MiniLoading/>
       </div>
-      <select v-else-if="editMode" class="form-control" type="text" v-model="form.id_teacher">
+      <select v-else-if="editMode" class="form-control" type="text" v-model="info.id_teacher">
         <option v-for="teacher in teachers" :value="teacher.id" :key="teacher.id">{{ teacher.name }}</option>
       </select>
-      <p v-else>{{this.form.place}}</p>
+      <p v-else>{{this.form.name}}</p>
     </div>
     <div class="col-12 col-md-2 p-3 mb-2 bg-info text-white">
       <div class="d-flex justify-content-center" v-if="this.loading">
         <MiniLoading/>
       </div>
 
-      <select v-else-if="editMode" class="form-control" type="text" v-model="form.id_bus">
+      <select v-else-if="editMode" class="form-control" type="text" v-model="info.id_bus">
         <option v-for="bus in busses" :value="bus.id" :key="bus.id">{{ bus.type }}</option>
       </select>
-      <p v-else>{{this.form.place}}</p>
+      <p v-else>{{this.form.type}}</p>
     </div>
-    <div class="col-6 col-md-1">
+    <div class="col-4 col-md-1">
       <br>
       <button v-if="editMode" type="button" class="btn btn-outline-dark" @click="updateBuses()">
         <font-awesome-icon icon="check"/>
@@ -53,10 +53,16 @@
         <font-awesome-icon icon="edit"/>
       </button>
     </div>
-    <div class="col-6 col-md-1">
+    <div class="col-4 col-md-1">
       <br>
       <button type="button" class="btn btn-outline-danger" @click="del()">
         <font-awesome-icon icon="trash"/>
+      </button>
+    </div>
+    <div class="col-4 col-md-1">
+      <br>
+      <button type="button" class="btn btn-outline-info" @click="redirect()">
+        <font-awesome-icon icon="database"/>
       </button>
     </div>
   </div>
@@ -73,8 +79,10 @@ export default {
       form: {
         place: this.info.place,
         date_practice: this.info.date_practice,
-        place: this.info.place,
-        place: this.info.place
+        name: this.info.name,
+        type: this.info.type,
+        id_teacher: this.info.id_teacher,
+        id_bus: this.info.id_bus
       },
       editMode: false,
       loading: false,
@@ -82,6 +90,9 @@ export default {
     };
   },
   methods: {
+    redirect() {
+      window.location = `/admin/practicas/${this.id}`;
+    },
     edit() {
       this.editMode = true;
     },

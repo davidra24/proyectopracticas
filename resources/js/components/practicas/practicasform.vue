@@ -64,7 +64,6 @@ export default {
     },
     async postPractices() {
       this.loading = true;
-      this.form.date_practice = this.form.date_practice.toLocaleDateString();
       await fetch("/api/practices", {
         method: "POST",
         body: JSON.stringify(this.form),

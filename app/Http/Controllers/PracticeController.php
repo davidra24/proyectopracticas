@@ -14,13 +14,13 @@ class PracticeController extends Controller
      */
     private $practice;
 
-    public function __construct(Practice $practice){
-        $this->practice=$practice;
-
+    public function __construct(Practice $practice)
+    {
+        $this->practice = $practice;
     }
     public function index()
     {
-        $practice=viewPractice::all();
+        $practice = viewPractice::all();
         return response()->json($practice);
     }
 
@@ -42,11 +42,11 @@ class PracticeController extends Controller
      */
     public function store(Request $request)
     {
-        $search=Practice::find($request->id);
-        if($search==null){
-        $practice= Practice::create($request->all());
-        $practice->save();
-        return response()->json($practice);
+        $search = Practice::find($request->id);
+        if ($search == null) {
+            $practice = Practice::create($request->all());
+            $practice->save();
+            return response()->json($practice);
         }
     }
 
@@ -58,9 +58,8 @@ class PracticeController extends Controller
      */
     public function show($practice)
     {
-        $data= viewPractice::find($practice);       
+        $data = viewPractice::find($practice);
         return response()->json($data);
-        
     }
 
     /**
@@ -83,14 +82,13 @@ class PracticeController extends Controller
      */
     public function update(Request $request, $practice)
     {
-        $data= Practice::find($practice);
-        if($data==null){
+        $data = Practice::find($practice);
+        if ($data == null) {
             return null;
-        }
-        else{
+        } else {
             $data->fill($request->all());
             $data->save();
-            $practice=$data;
+            $practice = $data;
             return response()->json($practice);
         }
     }
@@ -103,12 +101,10 @@ class PracticeController extends Controller
      */
     public function destroy($practice)
     {
-        $data= Practice::find($practice);
+        $data = Practice::find($practice);
         $data->managePractice()->delete();
-        $data->teacher()->delete();
-        $data->bus()->delete();
+        /*$data->teacher()->delete();
+         $data->bus()->delete();*/
         $data->delete();
-            
-        
     }
 }

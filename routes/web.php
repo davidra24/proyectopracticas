@@ -26,9 +26,9 @@ Route::group(
         ]);
         Route::get('/estudiantes', 'AdminController@estudiantes');
         Route::get('/practicas', 'AdminController@practicas');
+        Route::get('/practicas/{id}', 'AdminController@practica');
         Route::get('/docentes', 'AdminController@docentes');
         Route::get('/buses', 'AdminController@buses');
-        
     }
 );
 Route::group(
@@ -38,15 +38,12 @@ Route::group(
             'uses' => 'UserController@index',
             'as' => 'user.index'
         ]);
-        
+
         Route::get('/reportes', 'UserController@reportes');
     }
 );
 
 Route::get('/', 'WelcomeController@index');
-
-
-
 
 Auth::routes();
 
