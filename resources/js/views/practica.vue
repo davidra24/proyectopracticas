@@ -1,5 +1,27 @@
 <template>
-  <h1>Hola desde {{this.data}}</h1>
+  <div class="container">
+    <div class="row alert alert-info" role="alert">
+      <div class="col-12 col-md-6 col-lg-4 d-flex justify-content-center" v-if="this.loading">
+        <MiniLoading/>
+      </div>
+      <div v-else class="col-12 col-md-6 col-lg-4">
+        <Strong>Lugar: {{this.data.place}}</Strong>
+      </div>
+      <div class="col-12 col-md-6 col-lg-4 d-flex justify-content-center" v-if="this.loading">
+        <MiniLoading/>
+      </div>
+      <div v-else class="col-12 col-md-6 col-lg-4">
+        <Strong>Fecha: {{this.data.date_practice}}</Strong>
+      </div>
+      <div class="col-12 col-md-6 col-lg-4 d-flex justify-content-center" v-if="this.loading">
+        <MiniLoading/>
+      </div>
+      <div v-else class="col-12 col-md-6 col-lg-4">
+        <Strong>Docente: {{this.data.name}}</Strong>
+      </div>
+    </div>
+    <ManagePracticesForm :load="this.load" :students="this.students"/>
+  </div>
 </template>
 
 <script>
@@ -7,8 +29,10 @@ export default {
   data() {
     return {
       data: [],
+      students: [],
+      load: true,
       error: null,
-      loading: false,
+      loading: true,
       id: window.location.href
         .toString()
         .charAt(window.location.href.toString().length - 1)
@@ -26,10 +50,23 @@ export default {
           this.error = error;
           this.loading = false;
         });
+    },
+    async getStudents() {
+      await fetch("/api/students")
+        .then(res => res.json())
+        .then(res => {
+          this.students = res;
+          this.load = false;
+        })
+        .catch(error => {
+          this.error = error;
+          this.load = false;
+        });
     }
   },
   mounted() {
     this.getPractice();
+    this.getStudents();
   }
 };
 </script>

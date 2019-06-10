@@ -20,6 +20,8 @@ import Login from './views/login.vue';
 import AdminPanel from './views/adminpanel.vue';
 import Estudiantes from './views/estudiantes.vue';
 import Practicas from './views/practicas.vue';
+import ManagePracticesForm from './components/managepractices/maganepracticesform.vue';
+import ManagePracticesInfo from './components/managepractices/managepracticesinfo';
 import Practica from './views/practica.vue';
 import DocenteInfo from './components/docentes/docenteinfo.vue';
 import DocenteForm from './components/docentes/docenteform.vue';
@@ -49,6 +51,8 @@ Vue.component('EstudianteInfo', EstudianteInfo);
 Vue.component('EstudianteForm', EstudianteForm);
 Vue.component('PracticaInfo', PracticaInfo);
 Vue.component('PracticaForm', PracticaForm);
+Vue.component('ManagePracticesInfo', ManagePracticesInfo);
+Vue.component('ManagePracticesForm', ManagePracticesForm);
 Vue.component('Loading', Loading);
 Vue.component('MiniLoading', MiniLoading);
 
@@ -67,6 +71,8 @@ const app = new Vue({
         busform: BusForm,
         estudianteinfo: EstudianteInfo,
         estudianteform: EstudianteForm,
+        managepracticesinfo: ManagePracticesInfo,
+        managepracticesform: ManagePracticesForm,
         practicainfo: PracticaInfo,
         practicaform: PracticaForm,
         docentes: Docentes,
