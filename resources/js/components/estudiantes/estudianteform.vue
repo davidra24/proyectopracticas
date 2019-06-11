@@ -6,7 +6,7 @@
     </div>
     <div v-else class="row">
       <div class="col-12 col-md-4">
-        <input class="form-control" placeholder="codigo" type="text" v-model="form.id">
+        <input class="form-control" placeholder="codigo" type="number" v-model="form.id">
       </div>
       <div class="col-12 col-md-4">
         <input class="form-control" placeholder="nombre" type="text" v-model="form.name">
