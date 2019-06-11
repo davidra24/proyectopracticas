@@ -113,7 +113,7 @@ class ManagePracticeController extends Controller
         $data = ManagePractice::where('id_practice', $request->id_practice)
             ->where('id_student', $request->id_student)
             ->first();
-        $view = ViewManagePractice::where('id_practice', $request->id_practice)
+        /*$view = ViewManagePractice::where('id_practice', $request->id_practice)
             ->where('id_student', $request->id_student)
             ->first();
         $std = $view->id_student;
@@ -121,7 +121,7 @@ class ManagePracticeController extends Controller
         $practice = $view->id_practice;
         $data->student()->detach($std);
         $data->teacher()->detach($teacher);
-        $data->practice()->detach($practice);
+        $data->practice()->detach($practice);*/
         $data->delete();
     }
 }

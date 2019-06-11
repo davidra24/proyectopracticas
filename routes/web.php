@@ -39,6 +39,7 @@ Route::group(
             'as' => 'user.index'
         ]);
 
+        Route::get('/reportes/{id}', 'UserController@reporte');
         Route::get('/reportes', 'UserController@reportes');
     }
 );

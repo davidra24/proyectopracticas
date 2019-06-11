@@ -14,4 +14,8 @@ class UserController extends Controller
     {
         return view('user.reportes');
     }
+    function reporte()
+    {
+        return view('user.reporte');
+    }
 }

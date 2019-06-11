@@ -37,6 +37,7 @@ import Docentes from './views/docentes.vue';
 import Buses from './views/buses.vue';
 import UserPanel from './views/userpanel';
 import Reportes from './views/reportes';
+import Reporte from './views/reporte';
 import VueSweetalert2 from 'vue-sweetalert2';
 
 Vue.use(VueSweetalert2);
@@ -80,6 +81,7 @@ const app = new Vue({
         miniloading: MiniLoading,
         buses: Buses,
         userpanel: UserPanel,
-        reportes: Reportes
+        reportes: Reportes, 
+        reporte: Reporte 
     }
 });
