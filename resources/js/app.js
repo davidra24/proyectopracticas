@@ -56,6 +56,7 @@ Vue.component('ManagePracticesInfo', ManagePracticesInfo);
 Vue.component('ManagePracticesForm', ManagePracticesForm);
 Vue.component('Loading', Loading);
 Vue.component('MiniLoading', MiniLoading);
+Vue.component('Reporte', Reporte);
 
 const app = new Vue({
     el: '#app',
@@ -81,7 +82,7 @@ const app = new Vue({
         miniloading: MiniLoading,
         buses: Buses,
         userpanel: UserPanel,
-        reportes: Reportes, 
-        reporte: Reporte 
+        reportes: Reportes,
+        reporte: Reporte
     }
 });

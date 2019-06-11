@@ -14037,7 +14037,33 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-/* harmony default export */ __webpack_exports__["default"] = ({});
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  props: ["info"],
+  methods: {},
+  mounted: function mounted() {}
+});
 
 /***/ }),
 
@@ -14050,6 +14076,18 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+//
+//
+//
+//
 //
 //
 //
@@ -14061,14 +14099,91 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
+      data: [],
+      practices: [],
+      error: null,
       loading: true,
-      data: null,
-      error: null
+      id: window.location.href.toString().charAt(window.location.href.toString().length - 1)
     };
   },
-  methods: {},
+  methods: {
+    getManagePractices: function () {
+      var _getManagePractices = _asyncToGenerator(
+      /*#__PURE__*/
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
+        var _this = this;
+
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                _context.next = 2;
+                return fetch("/api/managePractices/".concat(this.id)).then(function (res) {
+                  return res.json();
+                }).then(function (res) {
+                  _this.data = res;
+                  _this.loading = false;
+                })["catch"](function (error) {
+                  _this.error = error;
+                  _this.loading = false;
+                });
+
+              case 2:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee, this);
+      }));
+
+      function getManagePractices() {
+        return _getManagePractices.apply(this, arguments);
+      }
+
+      return getManagePractices;
+    }(),
+    getPractices: function () {
+      var _getPractices = _asyncToGenerator(
+      /*#__PURE__*/
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
+        var _this2 = this;
+
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                _context2.next = 2;
+                return fetch("/api/practices").then(function (res) {
+                  return res.json();
+                }).then(function (res) {
+                  _this2.practices = res;
+                  _this2.loading = false;
+                })["catch"](function (error) {
+                  _this2.error = error;
+                  _this2.loading = false;
+                });
+
+              case 2:
+              case "end":
+                return _context2.stop();
+            }
+          }
+        }, _callee2);
+      }));
+
+      function getPractices() {
+        return _getPractices.apply(this, arguments);
+      }
+
+      return getPractices;
+    }(),
+    update: function update() {
+      this.loading = true;
+      this.getManagePractices();
+    }
+  },
   mounted: function mounted() {
-    console.log("Component mounted.");
+    this.getPractices();
   }
 });
 
@@ -52822,7 +52937,41 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("h1", [_vm._v("Hola reporte")])
+  return _c("div", { staticClass: "row" }, [
+    _c("div", { staticClass: "col-12 card text-center" }, [
+      _c("div", { staticClass: "card-header" }, [
+        _c("strong", [_vm._v(_vm._s(_vm.info.place))]),
+        _vm._v(" "),
+        _c("br"),
+        _vm._v("\n      " + _vm._s(_vm.info.date_practice) + "\n    ")
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "card-body" }, [
+        _c("h5", { staticClass: "card-title" }, [
+          _c("strong", [_vm._v("Docente:")]),
+          _vm._v("\n        " + _vm._s(_vm.info.name) + "\n      ")
+        ]),
+        _vm._v(" "),
+        _c("p", { staticClass: "card-text" }, [
+          _c("strong", [_vm._v("Vehículo:")]),
+          _vm._v("\n        " + _vm._s(_vm.info.type) + "\n        "),
+          _c("br"),
+          _vm._v(" "),
+          _c("strong", [_vm._v("Conductor:")]),
+          _vm._v("\n        " + _vm._s(_vm.info.conductor) + "\n      ")
+        ]),
+        _vm._v(" "),
+        _c(
+          "a",
+          {
+            staticClass: "btn btn-primary",
+            attrs: { href: "/user/reportes/" + _vm.info.id }
+          },
+          [_vm._v("Ver estudiantes")]
+        )
+      ])
+    ])
+  ])
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -52846,20 +52995,38 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c(
+    "div",
+    { staticClass: "container" },
+    [
+      this.loading
+        ? _c(
+            "div",
+            { staticClass: "d-flex justify-content-center" },
+            [_c("Loading")],
+            1
+          )
+        : _vm._l(_vm.practices, function(managePractices) {
+            return _c(
+              "div",
+              { key: managePractices.id_student },
+              [
+                _c("Reporte", {
+                  key: managePractices.id_student,
+                  attrs: { info: managePractices },
+                  on: { update: _vm.update }
+                }),
+                _vm._v(" "),
+                _c("br")
+              ],
+              1
+            )
+          })
+    ],
+    2
+  )
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "row" }, [
-      _c("div", { staticClass: "col-12" }, [
-        _c("h1", [_vm._v("Hola mundo reportes")])
-      ])
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -66768,6 +66935,7 @@ vue__WEBPACK_IMPORTED_MODULE_4___default.a.component('ManagePracticesInfo', _com
 vue__WEBPACK_IMPORTED_MODULE_4___default.a.component('ManagePracticesForm', _components_managepractices_maganepracticesform_vue__WEBPACK_IMPORTED_MODULE_13__["default"]);
 vue__WEBPACK_IMPORTED_MODULE_4___default.a.component('Loading', _components_loading_loading_vue__WEBPACK_IMPORTED_MODULE_24__["default"]);
 vue__WEBPACK_IMPORTED_MODULE_4___default.a.component('MiniLoading', _components_loading_miniloading_vue__WEBPACK_IMPORTED_MODULE_25__["default"]);
+vue__WEBPACK_IMPORTED_MODULE_4___default.a.component('Reporte', _views_reporte__WEBPACK_IMPORTED_MODULE_30__["default"]);
 var app = new vue__WEBPACK_IMPORTED_MODULE_4___default.a({
   el: '#app',
   components: {

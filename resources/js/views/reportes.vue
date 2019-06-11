@@ -1,7 +1,11 @@
 <template>
-  <div class="row">
-    <div class="col-12">
-      <h1>Hola mundo reportes</h1>
+  <div class="container">
+    <div class="d-flex justify-content-center" v-if="this.loading">
+      <Loading/>
+    </div>
+    <div v-else v-for="managePractices in practices" v-bind:key="managePractices.id_student">
+      <Reporte :key="managePractices.id_student" :info="managePractices" @update="update"/>
+      <br>
     </div>
   </div>
 </template>
@@ -10,14 +14,47 @@
 export default {
   data() {
     return {
+      data: [],
+      practices: [],
+      error: null,
       loading: true,
-      data: null,
-      error: null
+      id: window.location.href
+        .toString()
+        .charAt(window.location.href.toString().length - 1)
     };
   },
-  methods: {},
+  methods: {
+    async getManagePractices() {
+      await fetch(`/api/managePractices/${this.id}`)
+        .then(res => res.json())
+        .then(res => {
+          this.data = res;
+          this.loading = false;
+        })
+        .catch(error => {
+          this.error = error;
+          this.loading = false;
+        });
+    },
+    async getPractices() {
+      await fetch("/api/practices")
+        .then(res => res.json())
+        .then(res => {
+          this.practices = res;
+          this.loading = false;
+        })
+        .catch(error => {
+          this.error = error;
+          this.loading = false;
+        });
+    },
+    update() {
+      this.loading = true;
+      this.getManagePractices();
+    }
+  },
   mounted() {
-    console.log("Component mounted.");
+    this.getPractices();
   }
 };
 </script>
