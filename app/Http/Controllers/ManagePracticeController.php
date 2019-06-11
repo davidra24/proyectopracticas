@@ -110,9 +110,8 @@ class ManagePracticeController extends Controller
      */
     public function destroy(Request $request)
     {
-        echo 'req................................. ' . $request;
-        $data = ManagePractice::where('id_practice', '=', $request->id_practice)
-            ->where('id_student', '=', $request->id_student)
+        $data = ManagePractice::where('id_practice', $request->id_practice)
+            ->where('id_student', $request->id_student)
             ->first();
         /*$view = ViewManagePractice::where('id_practice', $request->id_practice)
             ->where('id_student', $request->id_student)
