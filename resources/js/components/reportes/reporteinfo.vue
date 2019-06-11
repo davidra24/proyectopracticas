@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <h1>Los siguientes estudiantes asistirán a la práctica</h1>
+    <h1>Asistentes a esta práctica</h1>
     <div class="d-flex justify-content-center" v-if="this.loading">
       <Loading/>
     </div>

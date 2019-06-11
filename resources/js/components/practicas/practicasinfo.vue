@@ -56,14 +56,14 @@
     </div>
     <div class="col-4 col-md-1">
       <br>
-      <button type="button" class="btn btn-outline-danger" @click="del()">
-        <font-awesome-icon icon="trash"/>
+      <button type="button" class="btn btn-outline-info" @click="redirect()">
+        <font-awesome-icon icon="database"/>
       </button>
     </div>
     <div class="col-4 col-md-1">
       <br>
-      <button type="button" class="btn btn-outline-info" @click="redirect()">
-        <font-awesome-icon icon="database"/>
+      <button type="button" class="btn btn-outline-danger" @click="del()">
+        <font-awesome-icon icon="trash"/>
       </button>
     </div>
   </div>

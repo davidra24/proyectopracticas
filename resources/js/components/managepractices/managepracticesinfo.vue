@@ -1,7 +1,10 @@
 <template>
   <div class="row">
     <div class="col-10 p-3 mb-2 bg-info text-white">
-      <h4>{{info.namestudent}}</h4>
+      <div class="d-flex justify-content-center" v-if="this.loading">
+        <MiniLoading/>
+      </div>
+      <h4 v-else>{{info.namestudent}}</h4>
     </div>
     <div class="col-2">
       <br>
@@ -15,6 +18,12 @@
 <script>
 export default {
   props: ["info"],
+  data() {
+    return {
+      loading: false,
+      error: null
+    };
+  },
   methods: {
     async remove() {
       this.loading = true;
